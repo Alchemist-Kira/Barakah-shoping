@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "concurrently \"vite\" \"node server/index.js\"",
     "build": "vite build",
+    "start": "node server/index.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "migrate": "node server/migrate_data.js"
@@ -24,7 +25,9 @@
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.2",
     "react-zoom-pan-pinch": "^3.7.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

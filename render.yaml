@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: barakah-shop
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: VITE_ADMIN_USERNAME
+        value: admin
+      - key: VITE_ADMIN_PASSWORD_HASH
+        value: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" # Default 'admin123'
+      - key: BDCOURIER_API_KEY
+        sync: false
+    # Optional: If you want persistent storage for SQLite
+    # disk:
+    #   name: sqlite-data
+    #   mountPath: /opt/render/project/src/server/data
+    #   sizeGB: 1

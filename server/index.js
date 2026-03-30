@@ -117,8 +117,8 @@ app.put('/api/settings', authenticateToken, async (req, res) => {
     const strValue = typeof value === 'string' ? value : JSON.stringify(value);
     // MySQL equivalent for INSERT OR REPLACE
     await db.query(`
-      INSERT INTO settings (\`key\`, value) VALUES (?, ?) 
-      ON DUPLICATE KEY UPDATE value = VALUES(value)
+      INSERT INTO settings ("key", value) VALUES (?, ?) 
+      ON CONFLICT("key") DO UPDATE SET value = EXCLUDED.value
     `, [key, strValue]);
     res.json({ success: true });
   } catch(e) {
@@ -374,8 +374,8 @@ app.post('/api/products', authenticateToken, (req, res, next) => {
       if (!cats.find(c => c.name === product.category)) {
         cats.push({ name: product.category, subcategories: [] });
         await db.query(`
-          INSERT INTO settings (\`key\`, value) VALUES ('categories', ?) 
-          ON DUPLICATE KEY UPDATE value = VALUES(value)
+          INSERT INTO settings ("key", value) VALUES ('categories', ?) 
+          ON CONFLICT("key") DO UPDATE SET value = EXCLUDED.value
         `, JSON.stringify(cats));
       }
     }
@@ -633,6 +633,23 @@ app.get('/api/admin/products', authenticateToken, async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+
+// Production static file serving
+const distDir = path.join(__dirname, '../dist');
+if (fs.existsSync(distDir)) {
+  console.log('Serving frontend from:', distDir);
+  app.use(express.static(distDir));
+  // Catch-all route to serve the SPA (React) frontend
+  app.use((req, res) => {
+    // Exclude API routes and asset routes from catch-all
+    if (req.method === 'GET' && !req.path.startsWith('/api') && !req.path.startsWith('/uploads')) {
+      res.sendFile(path.join(distDir, 'index.html'));
+    } else if (req.path.startsWith('/api')) {
+      res.status(404).json({ error: 'API route not found' });
+    }
+  });
+}
+
 app.listen(PORT, async () => {
   await getDb(); // Initialize DB connection
   console.log(`E-commerce Server running on port ${PORT}`);
