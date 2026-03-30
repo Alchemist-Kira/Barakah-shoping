@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashedInput = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, passwordHash: hashedInput, rememberMe })
