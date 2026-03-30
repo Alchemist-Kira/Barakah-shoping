@@ -1,0 +1,129 @@
+.footer {
+  background-color: var(--text-dark);
+  color: var(--bg-color);
+  padding: 4rem 0 0;
+  margin-top: 6rem;
+  /* Increased significantly for clear separation */
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.footer h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.footer h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: white;
+}
+
+.footer p {
+  color: #9CA3AF;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #9CA3AF;
+  transition: var(--transition-smooth);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.social-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+.social-icon-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon-btn.facebook:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+}
+
+.social-icon-btn.whatsapp:hover {
+  background: #25D366;
+  border-color: #25D366;
+}
+
+.social-icon-btn.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  border-color: transparent;
+}
+
+.footer-contact p {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.footer-contact svg {
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    margin-top: 10rem;
+    /* Even more space on desktop */
+  }
+
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+  }
+}
