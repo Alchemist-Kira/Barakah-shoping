@@ -75,7 +75,7 @@ export default function ProductsTab({ products: ignoredProducts, setProducts: ig
   useEffect(() => {
     const fetchCats = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/settings');
+        const res = await fetch('/api/settings');
         const data = await res.json();
         if(data.categories) setAvailableCategories(JSON.parse(data.categories));
       } catch (err) {}
@@ -100,7 +100,7 @@ export default function ProductsTab({ products: ignoredProducts, setProducts: ig
         qs.append('page', page);
         qs.append('limit', 20);
 
-        const res = await fetch(`http://localhost:5000/api/admin/products?${qs.toString()}`, {
+        const res = await fetch(`/api/admin/products?${qs.toString()}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
@@ -193,7 +193,7 @@ export default function ProductsTab({ products: ignoredProducts, setProducts: ig
     sendData.append('images', JSON.stringify(imageOrder));
 
     try {
-      const url = editingProduct ? `http://localhost:5000/api/products/${editingProduct.id}` : 'http://localhost:5000/api/products';
+      const url = editingProduct ? `/api/products/${editingProduct.id}` : '/api/products';
       const method = editingProduct ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method: method,
@@ -219,7 +219,7 @@ export default function ProductsTab({ products: ignoredProducts, setProducts: ig
     if (!token) return;
     if(window.confirm('Delete this product permanently?')) {
       try {
-        const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+        const res = await fetch(`/api/products/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -264,7 +264,7 @@ export default function ProductsTab({ products: ignoredProducts, setProducts: ig
       id: `existing-${Date.now()}-${i}`,
       type: 'url',
       content: url,
-      preview: url.startsWith('http') ? url : `http://localhost:5000${url}`
+      preview: url.startsWith('http') ? url : `${url}`
     }));
     
     setProductImages(activeUrls);
@@ -387,7 +387,7 @@ export default function ProductsTab({ products: ignoredProducts, setProducts: ig
                   <div className="product-card-mobile-inner">
                     <div className="product-row-cell mobile-top-info">
                       <img 
-                        src={product.thumbnail ? (product.thumbnail.startsWith('http') ? product.thumbnail : `http://localhost:5000${product.thumbnail}`) : `http://localhost:5000${product.mainImage}`} 
+                        src={product.thumbnail ? (product.thumbnail.startsWith('http') ? product.thumbnail : `${product.thumbnail}`) : `${product.mainImage}`} 
                         alt={product.name} 
                         className="mobile-product-img"
                         onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/36x36?text=WP'; }}
@@ -412,7 +412,7 @@ export default function ProductsTab({ products: ignoredProducts, setProducts: ig
                 <td className="desktop-only">
                   <div className="product-row-cell">
                     <img 
-                      src={product.thumbnail ? (product.thumbnail.startsWith('http') ? product.thumbnail : `http://localhost:5000${product.thumbnail}`) : `http://localhost:5000${product.mainImage}`} 
+                      src={product.thumbnail ? (product.thumbnail.startsWith('http') ? product.thumbnail : `${product.thumbnail}`) : `${product.mainImage}`} 
                       alt={product.name} 
                       style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #E5E7EB' }} 
                       onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/36x36?text=WP'; }}

@@ -73,7 +73,7 @@ export default function Dashboard() {
   const fetchOrders = async () => {
     if (!token) return;
     try {
-      const res = await fetch('http://localhost:5000/api/orders', {
+      const res = await fetch('/api/orders', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -112,7 +112,7 @@ export default function Dashboard() {
   const handleUpdateOrderStatus = async (orderId, newStatus) => {
     if (!token) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+      const res = await fetch(`/api/orders/${orderId}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

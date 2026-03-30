@@ -18,7 +18,7 @@ export default function Footer() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/settings');
+        const res = await fetch('/api/settings');
         const data = await res.json();
         if (data.app_settings) {
           const s = JSON.parse(data.app_settings);

@@ -17,7 +17,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchAllSettings = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/settings');
+        const res = await fetch('/api/settings');
         const data = await res.json();
 
         if (data.categories) setCategories(JSON.parse(data.categories));

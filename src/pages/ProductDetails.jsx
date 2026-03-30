@@ -29,7 +29,7 @@ export default function ProductDetails() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:5000/api/products/${id}`);
+        const res = await fetch(`/api/products/${id}`);
         if (!res.ok) throw new Error('Not found');
         const data = await res.json();
 
@@ -42,9 +42,9 @@ export default function ProductDetails() {
         }
 
         const mainImg = data.mainImage || (imageList.length > 0 ? imageList[0] : 'https://placehold.co/800x800/e2e8f0/64748b?text=No+Image');
-        const finalMainImg = mainImg.startsWith('/uploads') ? `http://localhost:5000${mainImg}` : mainImg;
+        const finalMainImg = mainImg.startsWith('/uploads') ? `${mainImg}` : mainImg;
 
-        const preparedImages = imageList.map(img => img.startsWith('/uploads') ? `http://localhost:5000${img}` : img);
+        const preparedImages = imageList.map(img => img.startsWith('/uploads') ? `${img}` : img);
 
         const sizesArr = typeof data.sizes === 'string' ? JSON.parse(data.sizes || '[]') : (data.sizes || []);
         const colorsArr = typeof data.colors === 'string' ? JSON.parse(data.colors || '[]') : (data.colors || []);

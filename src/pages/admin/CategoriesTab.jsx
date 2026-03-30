@@ -23,7 +23,7 @@ export default function CategoriesTab() {
   const fetchCategories = async () => {
     if (!token) return;
     try {
-      const res = await fetch('http://localhost:5000/api/settings', {
+      const res = await fetch('/api/settings', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -49,7 +49,7 @@ export default function CategoriesTab() {
   const saveSettings = async (updatedCategories) => {
     if (!token) return;
     try {
-      await fetch('http://localhost:5000/api/settings', {
+      await fetch('/api/settings', {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export default function CategoriesTab() {
       const form = new FormData();
       form.append('image', selectedFile);
       try {
-        const uploadRes = await fetch('http://localhost:5000/api/upload', {
+        const uploadRes = await fetch('/api/upload', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
           body: form
@@ -121,7 +121,7 @@ export default function CategoriesTab() {
       image: cat.image || ''
     });
     setSelectedFile(null);
-    setPreviewUrl(cat.image ? (cat.image.startsWith('http') ? cat.image : `http://localhost:5000${cat.image}`) : '');
+    setPreviewUrl(cat.image ? (cat.image.startsWith('http') ? cat.image : `${cat.image}`) : '');
     setIsModalOpen(true);
   };
 
@@ -212,7 +212,7 @@ export default function CategoriesTab() {
                 <td>
                   <div className="product-row-cell" style={{ gap: '1rem' }}>
                     {cat.image ? (
-                      <img src={cat.image.startsWith('http') ? cat.image : `http://localhost:5000${cat.image}`} alt={cat.name} style={{ width: '45px', height: '45px', objectFit: 'cover', borderRadius: '4px' }} />
+                      <img src={cat.image.startsWith('http') ? cat.image : `${cat.image}`} alt={cat.name} style={{ width: '45px', height: '45px', objectFit: 'cover', borderRadius: '4px' }} />
                     ) : (
                       <div style={{ width: '45px', height: '45px', backgroundColor: '#F1F5F9', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8' }}>
                         <ImageIcon size={20} />

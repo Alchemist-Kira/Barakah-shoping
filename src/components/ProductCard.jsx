@@ -7,7 +7,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
   const displayPrice = product.price || product.salePrice || product.regularPrice || 0;
   let displayImage = product.image || product.thumbnail || product.mainImage || 'https://placehold.co/400x400/e2e8f0/64748b?text=No+Image';
   if (displayImage.startsWith('/uploads')) {
-    displayImage = `http://localhost:5000${displayImage}`;
+    displayImage = `${displayImage}`;
   }
 
   const isOutOfStock = product.inStock === false || product.inStock === 0 || product.inStock === '0' || product.stockQuantity <= 0;

@@ -31,7 +31,7 @@ export default function SettingsTab() {
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/settings');
+      const res = await fetch('/api/settings');
       const data = await res.json();
       if (data.app_settings) setSettings(JSON.parse(data.app_settings));
     } catch (e) { console.error("Failed to load settings:", e); }
@@ -42,7 +42,7 @@ export default function SettingsTab() {
     e.preventDefault();
     setIsSaving(true);
     try {
-      const res = await fetch('http://localhost:5000/api/settings', {
+      const res = await fetch('/api/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ key: 'app_settings', value: settings })
@@ -73,7 +73,7 @@ export default function SettingsTab() {
         const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
         return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
       };
-      const res = await fetch('http://localhost:5000/api/auth/change-password', {
+      const res = await fetch('/api/auth/change-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({

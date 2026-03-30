@@ -80,7 +80,7 @@ export default function Store() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/settings');
+        const res = await fetch('/api/settings');
         const data = await res.json();
         if (data.categories) setAllCategories(JSON.parse(data.categories));
       } catch (err) {}
@@ -91,7 +91,7 @@ export default function Store() {
   useEffect(() => {
     const fetchMaxPrice = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/store/products?limit=1000');
+        const res = await fetch('/api/store/products?limit=1000');
         const data = await res.json();
         const allProds = data.products || [];
         if (allProds.length > 0) {
@@ -116,7 +116,7 @@ export default function Store() {
         queryParams.set('page', page);
         queryParams.set('limit', 12);
 
-        const res = await fetch(`http://localhost:5000/api/store/products?${queryParams.toString()}`);
+        const res = await fetch(`/api/store/products?${queryParams.toString()}`);
         const data = await res.json();
         
         if (!isMounted) return;

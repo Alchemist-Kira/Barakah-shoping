@@ -126,7 +126,7 @@ export default function Home() {
   useEffect(() => {
     const loadHomeData = async () => {
       try {
-        const prodRes = await fetch('http://localhost:5000/api/store/products?limit=8');
+        const prodRes = await fetch('/api/store/products?limit=8');
         const prodData = await prodRes.json();
         if (prodData.products) setFeaturedProducts(prodData.products);
       } catch (err) {
@@ -134,7 +134,7 @@ export default function Home() {
       }
 
       try {
-        const setRes = await fetch('http://localhost:5000/api/settings');
+        const setRes = await fetch('/api/settings');
         const setData = await setRes.json();
 
         if (setData.categories) {
@@ -174,7 +174,7 @@ export default function Home() {
             onTransitionEnd={handleTransitionEnd}
           >
             {extendedBanners.map((banner, idx) => {
-              const imgUrl = banner.image ? (banner.image.startsWith('http') || banner.image.startsWith('/images') ? banner.image : `http://localhost:5000${banner.image}`) : '';
+              const imgUrl = banner.image ? (banner.image.startsWith('http') || banner.image.startsWith('/images') ? banner.image : `${banner.image}`) : '';
               // A slide is "active" if it's the current slide OR if it's a replica of the current real slide
               const isActive = idx === currentSlide;
 
@@ -242,7 +242,7 @@ export default function Home() {
           </div>
           <div className="categories-grid">
             {categories.map((cat, index) => {
-              const imgUrl = cat.image ? `http://localhost:5000${cat.image}` : null;
+              const imgUrl = cat.image ? `${cat.image}` : null;
               return (
                 <Link
                   key={cat.id || index}

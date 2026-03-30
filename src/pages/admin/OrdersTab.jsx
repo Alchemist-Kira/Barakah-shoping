@@ -39,7 +39,7 @@ export default function OrdersTab({ orders, fetchOrders, handleUpdateOrderStatus
     if (!token) return;
     if (!window.confirm("Are you sure you want to clear ALL non-pending orders? Only Pending orders will be kept. This action cannot be undone.")) return;
     try {
-      const res = await fetch('http://localhost:5000/api/orders/history', {
+      const res = await fetch('/api/orders/history', {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -62,7 +62,7 @@ export default function OrdersTab({ orders, fetchOrders, handleUpdateOrderStatus
     if (!token) return;
     if (!window.confirm(`Permanently delete order #${orderId}? This cannot be undone.`)) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+      const res = await fetch(`/api/orders/${orderId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -84,7 +84,7 @@ export default function OrdersTab({ orders, fetchOrders, handleUpdateOrderStatus
     if (!token) return;
     setFraudLoading(prev => ({ ...prev, [orderId]: true }));
     try {
-      const res = await fetch('http://localhost:5000/api/fraud-check', {
+      const res = await fetch('/api/fraud-check', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -514,7 +514,7 @@ export default function OrdersTab({ orders, fetchOrders, handleUpdateOrderStatus
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                     {order.items.map((item, idx) => {
                       const img = item.product.mainImage || item.product.thumbnail || item.product.image;
-                      const finalImg = img?.startsWith('/uploads') ? `http://localhost:5000${img}` : (img || 'https://placehold.co/100x100?text=No+Image');
+                      const finalImg = img?.startsWith('/uploads') ? `${img}` : (img || 'https://placehold.co/100x100?text=No+Image');
                       return (
                         <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.75rem', backgroundColor: 'white', borderRadius: '10px', border: '1px solid #F3F4F6' }}>
                           <Link to={`/product/${item.product.id}`}>

@@ -27,7 +27,7 @@ export default function Checkout() {
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/settings');
+      const res = await fetch('/api/settings');
       const data = await res.json();
       if (data.app_settings) {
         const settings = JSON.parse(data.app_settings);
@@ -105,7 +105,7 @@ export default function Checkout() {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/orders', {
+      const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData)
@@ -177,7 +177,7 @@ export default function Checkout() {
               {cartItems.map((item) => (
                 <div key={item.product.id} className="cart-item">
                   <img 
-                    src={item.product.mainImage?.startsWith('/uploads') ? `http://localhost:5000${item.product.mainImage}` : (item.product.mainImage || 'https://placehold.co/100x100?text=No+Image')} 
+                    src={item.product.mainImage?.startsWith('/uploads') ? `${item.product.mainImage}` : (item.product.mainImage || 'https://placehold.co/100x100?text=No+Image')} 
                     alt={item.product.name} 
                     className="cart-item-image" 
                   />

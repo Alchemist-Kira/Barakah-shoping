@@ -24,7 +24,7 @@ export default function BannersTab() {
 
   const fetchBanners = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/settings', {
+      const res = await fetch('/api/settings', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -49,7 +49,7 @@ export default function BannersTab() {
 
   const saveSettings = async (updatedBanners) => {
     try {
-      await fetch('http://localhost:5000/api/settings', {
+      await fetch('/api/settings', {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export default function BannersTab() {
       const form = new FormData();
       form.append('image', selectedFile);
       try {
-        const uploadRes = await fetch('http://localhost:5000/api/upload', {
+        const uploadRes = await fetch('/api/upload', {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
           body: form
@@ -142,7 +142,7 @@ export default function BannersTab() {
       buttonLink: banner.buttonLink || '' 
     });
     setSelectedFile(null);
-    setPreviewUrl(banner.image ? (banner.image.startsWith('http') ? banner.image : `http://localhost:5000${banner.image}`) : '');
+    setPreviewUrl(banner.image ? (banner.image.startsWith('http') ? banner.image : `${banner.image}`) : '');
     setIsModalOpen(true);
   };
 
@@ -202,7 +202,7 @@ export default function BannersTab() {
                 </td>
                 <td>
                   <img 
-                    src={banner.image.startsWith('http') ? banner.image : `http://localhost:5000${banner.image}`} 
+                    src={banner.image.startsWith('http') ? banner.image : `${banner.image}`} 
                     alt={banner.title} 
                     style={{ height: '70px', width: '200px', objectFit: 'cover', borderRadius: '4px', backgroundColor: '#F1F5F9' }} 
                   />
